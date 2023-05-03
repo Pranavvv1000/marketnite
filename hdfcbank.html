@@ -1,0 +1,161 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="hdfcbank.css">
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+</head>
+<body>
+    <div>
+        <h3 class="t1">HDFCBANK</h3>
+        </div>
+            <div id="d1">
+                <!-- TradingView Widget BEGIN -->
+                <script type="text/javascript" src="https://d33t3vvu2t2yu5.cloudfront.net/tv.js"></script>
+                <script type="text/javascript">
+                new TradingView.widget({
+                  "autosize": true,
+                  "symbol": "NSE-HDFCBANK",
+                  "interval": "D",
+                  "timezone": "Etc/UTC",
+                  "theme": "Black",
+                  "style": "1",
+                  "locale": "en",
+                  "toolbar_bg": "rgba(0, 0, 0, 1)",
+                  "hide_top_toolbar": true,
+                  "save_image": false,
+                  "hideideas": true
+                });
+                </script>
+                <!-- TradingView Widget END -->
+                </div>
+
+                <div id="tab-wrapper">
+                    <ul id="tab-buttons">
+                      <li class="active">ANALYSIS</li>
+                      
+                      <li>VOTES</li>
+                      <li>COMMENTS</li>
+                    </ul>
+                    <div id="tab-content">
+                      <div class="tab active">
+                        <py-script src="app.py">
+                          <p style="margin: 10px;">CONCLUSION</p>
+                            <img src="http://127.0.0.1:5000/hdfcplot_png.png" alt="" width="100%" height="500px">
+                            <!-- <iframe src="http://127.0.0.1:5000/plot.png" width="100%" height="400"></iframe> -->
+                            <iframe src="http://127.0.0.1:5000/hdfcbank" width="100%" height="400"></iframe>
+                        </py-script>
+                      </div>
+                      <div class="tab">
+                        <div class="strawpoll-embed" id="strawpoll_w4nWreQ2YyA" style="height: 544px; max-width: 640px; width: 100%; margin: 0 auto; display: flex; flex-direction: column;"><iframe title="StrawPoll Embed" id="strawpoll_iframe_w4nWreQ2YyA" src="https://strawpoll.com/embed/polls/w4nWreQ2YyA" style="position: static; visibility: visible; display: block; width: 100%; flex-grow: 1;" frameborder="0" allowfullscreen allowtransparency>Loading...</iframe><script async src="https://cdn.strawpoll.com/dist/widgets.js" charset="utf-8"></script></div>
+                      </div>
+                      <div class="tab">
+                        <div class="container">
+                          <div class="comment-box">
+                            <div class="comment-form">
+                              <div class="header">Add Your Comment</div>
+                              <form action="#" onsubmit="event.preventDefault(); postComment()">
+                                <div> 
+                                  <input type="text" id="name" placeholder="Name"/>
+                                </div>
+                                <div>
+                                  <textarea id="comment" rows="3" cols="30" placeholder="Comment"></textarea>
+                                </div>
+                                <button type="submit" onclick="postComment()">COMMENT</button>
+                              </form>  
+                            </div>
+                            <div>
+                              <h4 class="header">Comments</h4>
+                              <div id="comments"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <script>
+                          var config = {
+                          
+                            apiKey: "AIzaSyCo2P87JBkQY-zstnyzZ4agtyLA20hcqOk",
+                            authDomain: "hdfcbank-d741b.firebaseapp.com",
+                            databaseURL: "https://hdfcbank-d741b-default-rtdb.firebaseio.com/",
+                      };
+                          firebase.initializeApp(config);
+                          var ref = firebase.database().ref();
+                      
+                      function timeStamp() {
+                        var now = new Date();
+                        var date = [now.getMonth() + 1, now.getDate(), now.getFullYear()];
+                        var time = [now.getHours(), now.getMinutes()];
+                        var suffix = (time[0] < 12) ? "AM" : "PM";
+                        time[0] = (time[0] < 12) ? time[0] : time[0] - 12;
+                      
+                        for (var i = 1; i < 3; i++) {
+                          if (time[i] < 10) {
+                            time[i] = "0" + time[i];
+                          }
+                        }
+                      
+                        return date.join("/") + ", " + time.join(":") + " " + suffix;
+                      }
+                      
+                      function postComment() {
+                        var name = document.getElementById("name").value,
+                            comment = document.getElementById("comment").value,
+                            time = timeStamp();
+                      
+                        if (name && comment) {
+                          ref.push({
+                            name: name,
+                            comment: comment,
+                            time: time
+                          });
+                        }
+                      
+                        document.getElementById("name").value = '';
+                        document.getElementById("comment").value = '';
+                      }
+                      
+                      ref.on("child_added", function(snapshot) {
+                        var comment = snapshot.val();
+                        addComment(comment.name, comment.comment, comment.time);
+                      });
+                      
+                      function addComment(name, comment, timeStamp) {
+                        var comments = document.getElementById("comments");
+                        comments.innerHTML = "<hr><h4>" + name + " says<span>" + timeStamp + "</span></h4><p>" + comment + "</p>" + comments.innerHTML;
+                      }
+                      
+                      </script>
+                      </div>
+                      
+                    </div>
+                  </div>
+</body>
+
+<script>
+    console.clear(); 
+
+let tabBtns = document.getElementById('tab-buttons');
+
+tabBtns.addEventListener('click', event => {
+  let buttons = tabBtns.children;
+  let tabs = document.getElementById('tab-content').children;
+  buttons = Array.from(buttons);
+  buttons.forEach(button => {
+    button.classList.contains('active') && button.classList.remove('active');
+  })
+  tabs = Array.from(tabs);
+  tabs.forEach(tab => {
+    tab.classList.contains('active') && tab.classList.remove('active');
+  })
+
+  const index = buttons.indexOf(event.target);
+	if (index > -1 && index < 3) {
+  	event.target.classList.add('active');
+  	tabs[index].classList.add('active');
+  }
+});
+
+</script>
+</html>
