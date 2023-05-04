@@ -7,3 +7,5 @@ git add .
 git commit -m "Updates"
 
 git push
+
+python app.py
