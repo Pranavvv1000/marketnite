@@ -1,5 +1,4 @@
 #!/bin/bash
 
-pip install --upgrade
-
-python app.py
+pip install --upgrade pip
+pip install flask yfinance pandas numpy matplotlib Figure
