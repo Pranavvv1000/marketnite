@@ -1,8 +1,8 @@
 #!/bin/bash
-Defaults  env_keep += "PATH"
-sudo apt install python3-pip
-python -m pip3 install --upgrade pip
-python -m pip3 install flask yfinance pandas numpy matplotlib Figure
+
+python -m pip install --upgrade pip
+python -m pip install flask yfinance pandas numpy Figure
+pip install matplotlib
 
 
 
