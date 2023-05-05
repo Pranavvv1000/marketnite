@@ -5,6 +5,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
+import webbrowser
+ 
+
 
 app = Flask(__name__)
 
@@ -271,7 +274,7 @@ def axisplot_png():
     return Response(output_axis.getvalue(), mimetype='image/png')
 
 
-
+webbrowser.open_new_tab('frontpage.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
