@@ -277,4 +277,4 @@ def axisplot_png():
 webbrowser.open_new_tab('frontpage.html')
 
 if __name__ == '__main__':
-    app.run(debug=false,host='0.0.0.0')
+    app.run(debug=True)
