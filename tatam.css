@@ -34,16 +34,16 @@ body {
 }
 
 div#tab-wrapper {
-  display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
 margin-top: 20px;
   background-color: white;
 }
-
+ul#tab-buttons{
+display:flex;
+}
 div#tab-wrapper > ul#tab-buttons {
-  display: flex;
   list-style: none;
   border-bottom: 1px solid #ccc;
   padding: 0;
