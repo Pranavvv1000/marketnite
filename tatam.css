@@ -101,7 +101,6 @@ div#tab-wrapper > div#tab-content {
 div > #tab-content > .tab {
   position: absolute;
   visibility: hidden;
-  display: flex;
   flex-direction: column;
   width: 100%;
   opacity: 0;
