@@ -24,14 +24,6 @@ border: none;
   margin-top: 20px;    
 }
 
-html,
-body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: 'Inter', sans-serif;
-}
 
 div#tab-wrapper {
   flex-direction: column;
